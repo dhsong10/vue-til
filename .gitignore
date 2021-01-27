@@ -19,3 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# vue-til-server from https://github.com/joshua1988/vue-til-server.git
+vue-til-server/
