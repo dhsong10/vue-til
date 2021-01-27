@@ -22,3 +22,6 @@ yarn-error.log*
 
 # vue-til-server from https://github.com/joshua1988/vue-til-server.git
 vue-til-server/
+
+# package manager
+package-lock.json
