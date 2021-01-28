@@ -1,9 +1,17 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <AppHeader />
+  </div>
 </template>
 
 <script>
-export default {};
+import AppHeader from '@/components/common/AppHeader.vue';
+
+export default {
+  components: {
+    AppHeader,
+  },
+};
 </script>
 
 <style></style>
