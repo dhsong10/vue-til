@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbar">
       <div class="navbar-nav ml-auto">
         <div class="nav-item p-1 mx-1 text-white">
-          <span class="rounded px-2 py-1">Login</span>
+          <span class="rounded px-2 py-1" @click="routeLogin">Login</span>
         </div>
         <div class="nav-item p-1 mx-1 text-white">
           <span class="rounded px-2 py-1">Signup</span>
@@ -32,6 +32,11 @@ export default {
     return {
       collapsed: false,
     };
+  },
+  methods: {
+    routeLogin() {
+      this.$router.push('/login');
+    },
   },
 };
 </script>
