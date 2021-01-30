@@ -19,7 +19,7 @@
           <span class="rounded px-2 py-1" @click="routeLogin">Login</span>
         </div>
         <div class="nav-item p-1 mx-1 text-white">
-          <span class="rounded px-2 py-1">Signup</span>
+          <span class="rounded px-2 py-1" @click="routeSignup">Signup</span>
         </div>
       </div>
     </div>
@@ -36,6 +36,9 @@ export default {
   methods: {
     routeLogin() {
       this.$router.push('/login');
+    },
+    routeSignup() {
+      this.$router.push('/signup');
     },
   },
 };

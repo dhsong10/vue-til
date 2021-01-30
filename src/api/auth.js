@@ -12,4 +12,8 @@ function loginUser(param) {
   return instance.post('login', param);
 }
 
-export { loginUser };
+function signupUser(param) {
+  return instance.post('signup', param);
+}
+
+export { loginUser, signupUser };
