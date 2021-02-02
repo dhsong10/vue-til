@@ -65,8 +65,13 @@ export default {
       };
 
       try {
-        const response = await loginUser(param);
-        console.log(response);
+        const { data } = await loginUser(param);
+        this.$store.commit('setUser', {
+          username: data.user.username,
+          nickname: data.user.nickname,
+          token: data.token,
+        });
+        this.$router.push('main');
       } catch (error) {
         console.log(error);
         this.logData.show = true;
@@ -79,6 +84,11 @@ export default {
       this.formData.userId = '';
       this.formData.password = '';
     },
+  },
+  created() {
+    if (this.$store.getters.isLogin) {
+      this.$router.push('main');
+    }
   },
 };
 </script>
