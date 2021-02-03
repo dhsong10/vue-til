@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/auth';
 export default {
   data() {
     return {
@@ -65,12 +64,7 @@ export default {
       };
 
       try {
-        const { data } = await loginUser(param);
-        this.$store.commit('setUser', {
-          username: data.user.username,
-          nickname: data.user.nickname,
-          token: data.token,
-        });
+        this.$store.dispatch('login', param);
         this.$router.push('main');
       } catch (error) {
         console.log(error);

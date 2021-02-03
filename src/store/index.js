@@ -1,28 +1,52 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { loginUser } from '@/api/auth';
+import {
+  saveTokenToCookie,
+  saveUsernameToCookie,
+  saveNicknameToCookie,
+  getTokenFromCookie,
+  getUsernameFromCookie,
+  getNicknameFromCookie,
+} from '@/utils/cookies';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     user: {
-      username: '',
-      nickname: '',
-      token: '',
+      username: getUsernameFromCookie() || '',
+      nickname: getNicknameFromCookie() || '',
     },
+    token: getTokenFromCookie() || '',
   },
   mutations: {
-    setUser(state, payload) {
-      state.user.username = payload.username;
-      state.user.nickname = payload.nickname;
-      state.user.token = payload.token;
+    setUser(state, user) {
+      state.user.username = user.username;
+      state.user.nickname = user.nickname;
+    },
+    setToken(state, token) {
+      state.token = token;
     },
   },
   getters: {
     isLogin(state) {
-      return state.user.token !== '';
+      return state.token !== '';
     },
   },
-  actions: {},
+  actions: {
+    async login({ commit }, payload) {
+      const { data } = await loginUser(payload);
+      commit('setUser', {
+        username: data.user.username,
+        nickname: data.user.nickname,
+      });
+      commit('setToken', data.token);
+      saveTokenToCookie(data.token);
+      saveUsernameToCookie(data.user.username);
+      saveNicknameToCookie(data.user.nickname);
+    },
+  },
   modules: {},
 });
