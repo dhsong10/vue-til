@@ -3,9 +3,9 @@ import Vuex from 'vuex';
 
 import { loginUser } from '@/api/auth';
 import {
-  saveTokenToCookie,
-  saveUsernameToCookie,
-  saveNicknameToCookie,
+  setTokenToCookie,
+  setUsernameToCookie,
+  setNicknameToCookie,
   getTokenFromCookie,
   getUsernameFromCookie,
   getNicknameFromCookie,
@@ -29,6 +29,14 @@ export default new Vuex.Store({
     setToken(state, token) {
       state.token = token;
     },
+    logout(state) {
+      state.user.username = '';
+      state.user.nickname = '';
+      state.token = '';
+      setTokenToCookie('');
+      setUsernameToCookie('');
+      setNicknameToCookie('');
+    },
   },
   getters: {
     isLogin(state) {
@@ -43,9 +51,9 @@ export default new Vuex.Store({
         nickname: data.user.nickname,
       });
       commit('setToken', data.token);
-      saveTokenToCookie(data.token);
-      saveUsernameToCookie(data.user.username);
-      saveNicknameToCookie(data.user.nickname);
+      setTokenToCookie(data.token, 5);
+      setUsernameToCookie(data.user.username, 5);
+      setNicknameToCookie(data.user.nickname, 5);
     },
   },
   modules: {},

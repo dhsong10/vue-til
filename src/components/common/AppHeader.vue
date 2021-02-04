@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">TIL: Today I Learned</a>
+    <a class="navbar-brand" href="/">
+      TIL: Today I Learned
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,12 +16,18 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbar">
+      <span class="small text-secondary" v-if="isLogin">
+        | {{ $store.state.user.nickname }}
+      </span>
       <div class="navbar-nav ml-auto">
-        <div class="nav-item p-1 mx-1 text-white">
+        <div v-if="!isLogin" class="nav-item p-1 mx-1 text-white">
           <span class="rounded px-2 py-1" @click="routeLogin">Login</span>
         </div>
-        <div class="nav-item p-1 mx-1 text-white">
+        <div v-if="!isLogin" class="nav-item p-1 mx-1 text-white">
           <span class="rounded px-2 py-1" @click="routeSignup">Signup</span>
+        </div>
+        <div v-if="isLogin" class="nav-item p-1 mx-1 text-white">
+          <span class="rounded px-2 py-1" @click="logout">Logout</span>
         </div>
       </div>
     </div>
@@ -34,6 +42,15 @@ export default {
     },
     routeSignup() {
       this.$router.push('/signup');
+    },
+    logout() {
+      this.$store.commit('logout');
+      this.$router.push('/');
+    },
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin;
     },
   },
 };

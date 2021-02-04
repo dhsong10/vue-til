@@ -1,19 +1,22 @@
-function expiryCookie() {
+function expiryCookie(expiredAfter) {
   const expiryTime = new Date();
-  expiryTime.setTime(expiryTime.getTime() + 5 * 60 * 1000);
+  expiryTime.setTime(expiryTime.getTime() + expiredAfter * 60 * 1000);
   return `expires=${expiryTime.toUTCString()}`;
 }
 
-function saveTokenToCookie(token) {
-  document.cookie = `vue-til-token=${token}; ${expiryCookie()}}; path=/;`;
+function setTokenToCookie(token, expiredAfter = 0) {
+  const cookieExpired = `${expiryCookie(expiredAfter)}`;
+  document.cookie = `vue-til-token=${token}; ${cookieExpired}; path=/;`;
 }
 
-function saveUsernameToCookie(username) {
-  document.cookie = `vue-til-username=${username}; ${expiryCookie()}}; path=/;`;
+function setUsernameToCookie(username, expiredAfter = 0) {
+  const cookieExpired = `${expiryCookie(expiredAfter)}`;
+  document.cookie = `vue-til-username=${username}; ${cookieExpired}; path=/;`;
 }
 
-function saveNicknameToCookie(nickname) {
-  document.cookie = `vue-til-nickname=${nickname}; ${expiryCookie()}}; path=/;`;
+function setNicknameToCookie(nickname, expiredAfter = 0) {
+  const cookieExpired = `${expiryCookie(expiredAfter)}`;
+  document.cookie = `vue-til-nickname=${nickname}; ${cookieExpired}; path=/;`;
 }
 
 function getTokenFromCookie() {
@@ -43,7 +46,7 @@ function getUsernameFromCookie() {
 function getNicknameFromCookie() {
   const cookie = document.cookie
     .split('; ')
-    .find(row => row.startsWith('vue-til-nicname'));
+    .find(row => row.startsWith('vue-til-nickname'));
 
   if (cookie) {
     return cookie.split('=')[1];
@@ -51,10 +54,11 @@ function getNicknameFromCookie() {
     return '';
   }
 }
+
 export {
-  saveTokenToCookie,
-  saveUsernameToCookie,
-  saveNicknameToCookie,
+  setTokenToCookie,
+  setUsernameToCookie,
+  setNicknameToCookie,
   getTokenFromCookie,
   getUsernameFromCookie,
   getNicknameFromCookie,
