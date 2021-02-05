@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import store from '@/store/index';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,6 +27,9 @@ const routes = [
       {
         name: 'Main',
         path: '/main',
+        beforeEnter(to, from, next) {
+          store.getters.isLogin ? next() : next('/login');
+        },
         component: () => import('@/views/PostListView.vue'),
       },
     ],

@@ -64,7 +64,7 @@ export default {
       };
 
       try {
-        this.$store.dispatch('login', param);
+        await this.$store.dispatch('login', param);
         this.$router.push('main');
       } catch (error) {
         console.log(error);
