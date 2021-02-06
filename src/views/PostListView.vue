@@ -7,6 +7,13 @@
         <PostCard :item="post" />
       </div>
     </div>
+
+    <div class="fixed-bottom text-right m-5">
+      <i
+        class="fa fa-3x fa-plus-circle text-primary cursor-pointer"
+        @click="$router.push('/post/add')"
+      />
+    </div>
   </div>
 </template>
 
@@ -55,4 +62,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>

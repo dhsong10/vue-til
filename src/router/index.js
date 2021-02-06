@@ -12,25 +12,30 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/login',
+        redirect: 'login',
       },
       {
         name: 'Login',
-        path: '/login',
+        path: 'login',
         component: () => import('@/views/LoginView.vue'),
       },
       {
         name: 'Signup',
-        path: '/signup',
+        path: 'signup',
         component: () => import('@/views/SignupView.vue'),
       },
       {
         name: 'Main',
-        path: '/main',
+        path: 'main',
         beforeEnter(to, from, next) {
           store.getters.isLogin ? next() : next('/login');
         },
         component: () => import('@/views/PostListView.vue'),
+      },
+      {
+        name: 'PostAdd',
+        path: 'post/add',
+        component: () => import('@/views/PostAddView.vue'),
       },
     ],
   },
