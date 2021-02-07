@@ -19,45 +19,20 @@
 
 <script>
 import PostCard from '@/components/PostCard.vue';
+import { fetchPosts } from '@/api/posts';
+
 export default {
   components: {
     PostCard,
   },
   data() {
     return {
-      posts: [
-        {
-          _id: '1',
-          title: '학습 노트 1',
-          contents: '학습 내용 1',
-          createdAt: new Date(),
-        },
-        {
-          _id: '2',
-          title: '학습 노트 2',
-          contents: '학습 내용 2',
-          createdAt: new Date(),
-        },
-        {
-          _id: '3',
-          title: '학습 노트 3',
-          contents: '학습 내용 3',
-          createdAt: new Date(),
-        },
-        {
-          _id: '4',
-          title: '학습 노트 4',
-          contents: '학습 내용 4',
-          createdAt: new Date(),
-        },
-        {
-          _id: '5',
-          title: '학습 노트 5',
-          contents: '학습 내용 5',
-          createdAt: new Date(),
-        },
-      ],
+      posts: [],
     };
+  },
+  async created() {
+    const { data } = await fetchPosts();
+    this.posts = [...data.posts];
   },
 };
 </script>
