@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { addPost } from '@/api/posts';
+
 export default {
   data() {
     return {
@@ -52,12 +54,14 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       const param = {
         title: this.formData.title,
         contents: this.formData.contents,
       };
-      console.log(param);
+      const response = await addPost(param);
+      console.log(response);
+      this.$router.push('/main');
     },
     initializeFormData() {
       this.formData.title = '';
