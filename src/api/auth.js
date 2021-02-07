@@ -1,19 +1,11 @@
-import axios from 'axios';
-
-const instance = createInstance();
-
-function createInstance() {
-  return axios.create({
-    baseURL: 'http://localhost:3000/',
-  });
-}
+import { auth } from '@/api/index';
 
 function loginUser(param) {
-  return instance.post('login', param);
+  return auth.post('login', param);
 }
 
 function signupUser(param) {
-  return instance.post('signup', param);
+  return auth.post('signup', param);
 }
 
 export { loginUser, signupUser };

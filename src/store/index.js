@@ -42,6 +42,9 @@ export default new Vuex.Store({
     isLogin(state) {
       return state.token !== '';
     },
+    getToken(state) {
+      return state.token;
+    },
   },
   actions: {
     async login({ commit }, payload) {
