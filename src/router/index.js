@@ -37,6 +37,11 @@ const routes = [
         path: 'post/add',
         component: () => import('@/views/PostAddView.vue'),
       },
+      {
+        name: 'PostEdit',
+        path: 'post/edit/:id',
+        component: () => import('@/views/PostEditView.vue'),
+      },
     ],
   },
 ];

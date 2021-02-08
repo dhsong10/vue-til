@@ -9,7 +9,7 @@
     <div class="card-footer">
       <p class="text-right">
         {{ item.createdAt | dateToString }}
-        <i class="fa fa-pencil mx-2"></i>
+        <i class="fa fa-pencil mx-2" @click="editPost" />
         <i class="fa fa-trash mx-2"></i>
       </p>
     </div>
@@ -24,6 +24,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    editPost() {
+      this.$router.push(`/post/edit/${this.item._id}`);
+    },
+  },
   filters: {
     dateToString(value) {
       const date = new Date(value);
@@ -34,17 +39,17 @@ export default {
         mm = '0' + mm;
       }
 
-      let dd = date.getDate();
+      let dd = date.getDate().toString();
       if (dd.length === 1) {
         dd = '0' + dd;
       }
 
-      let HH = date.getHours();
+      let HH = date.getHours().toString();
       if (HH.length === 1) {
         HH = '0' + HH;
       }
 
-      let MM = date.getMinutes();
+      let MM = date.getMinutes().toString();
       if (MM.length === 1) {
         MM = '0' + MM;
       }
