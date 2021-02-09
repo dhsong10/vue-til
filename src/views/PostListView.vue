@@ -3,7 +3,7 @@
     <h1 class="display-4 text-center my-5">Today I Learned</h1>
 
     <div class="row justify-content-md-center">
-      <div v-for="post in posts" :key="post._id" class="col col-md-4 my-2">
+      <div v-for="post in posts" :key="post._id" class="col col-md-6 my-2">
         <PostCard :item="post" />
       </div>
     </div>
