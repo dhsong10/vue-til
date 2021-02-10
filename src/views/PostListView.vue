@@ -4,7 +4,7 @@
 
     <div class="row justify-content-md-center">
       <div v-for="post in posts" :key="post._id" class="col col-md-6 my-2">
-        <PostCard :item="post" />
+        <PostCard :item="post" @posts:delete="initializePosts" />
       </div>
     </div>
 
@@ -30,9 +30,14 @@ export default {
       posts: [],
     };
   },
-  async created() {
-    const { data } = await fetchPosts();
-    this.posts = [...data.posts];
+  methods: {
+    async initializePosts() {
+      const { data } = await fetchPosts();
+      this.posts = [...data.posts];
+    },
+  },
+  created() {
+    this.initializePosts();
   },
 };
 </script>

@@ -9,14 +9,16 @@
     <div class="card-footer">
       <p class="text-right">
         {{ item.createdAt | dateToString }}
-        <i class="fa fa-pencil mx-2" @click="editPost" />
-        <i class="fa fa-trash mx-2"></i>
+        <i class="fa fa-pencil mx-2" @click="editItem" />
+        <i class="fa fa-trash mx-2" @click="deleteItem" />
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { deletePost } from '@/api/posts';
+
 export default {
   props: {
     item: {
@@ -25,8 +27,15 @@ export default {
     },
   },
   methods: {
-    editPost() {
+    editItem() {
       this.$router.push(`/post/edit/${this.item._id}`);
+    },
+    async deleteItem() {
+      const param = {
+        id: this.item._id,
+      };
+      await deletePost(param);
+      this.$emit('posts:delete');
     },
   },
   filters: {

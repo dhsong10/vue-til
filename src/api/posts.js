@@ -21,4 +21,9 @@ function updatePost(param) {
   });
 }
 
-export { fetchPosts, fetchPost, addPost, updatePost };
+function deletePost(param) {
+  const postId = param.id;
+  return posts.delete(`${postId}`);
+}
+
+export { fetchPosts, fetchPost, addPost, updatePost, deletePost };
